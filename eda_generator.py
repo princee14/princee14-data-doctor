@@ -1,4 +1,4 @@
-from ydata_profiling import ProfileReport
+from pandas_profiling import ProfileReport
 import os
 
 def generate_eda_report(
