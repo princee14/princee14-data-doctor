@@ -2,7 +2,8 @@ streamlit
 pandas
 matplotlib
 seaborn
-ydata-profiling # ==4.6.4 #
+ydata-profiling 
+
 
 
 
