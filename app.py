@@ -8,14 +8,16 @@ os.environ["STREAMLIT_DISABLE_CONFIG_FILE"] = "true"
 os.environ["STREAMLIT_CONFIG_DIR"] = "/tmp/.streamlit"
 os.makedirs("/tmp/.streamlit", exist_ok=True)
 
-
-
+# ✅ Handle optional dependency for profiling
+try:
+    from ydata_profiling import ProfileReport
+except ImportError:
+    ProfileReport = None
 
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import os
 from data_cleaner import clean_data
 from eda_generator import generate_eda_report
 from datetime import datetime
@@ -60,12 +62,7 @@ Each vertical line represents a column; brighter areas indicate missing entries 
     st.subheader("⚙️ Data Cleaning Options")
     remove_outliers = st.checkbox("📉 Remove Outliers (recommended)", value=True)
 
-    # ❌ Removed target column selectbox
-    # st.subheader("🎯 Optional: Select Target Column for EDA")
-    # target_col = st.selectbox("Select Target Column (or leave None)", ["None"] + list(uploaded_df.columns))
-    # if target_col == "None":
-    #     target_col = None
-    target_col = None  # Just pass None silently
+    target_col = None  # Target column not used for now
 
     # 🚀 Clean Button
     if st.button("🚀 Clean Data & Generate Report"):
