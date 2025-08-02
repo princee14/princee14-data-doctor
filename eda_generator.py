@@ -1,9 +1,10 @@
+import os
+
+# Try importing ydata_profiling safely
 try:
     from ydata_profiling import ProfileReport
 except ImportError:
     ProfileReport = None
-
-import os
 
 def generate_eda_report(
     df,
@@ -12,13 +13,15 @@ def generate_eda_report(
     target=None
 ):
     if ProfileReport is None:
-        raise ImportError("ydata_profiling is not installed. Please install it using: pip install ydata-profiling")
+        raise ImportError(
+            "ydata_profiling is not installed. Please install it using: pip install ydata-profiling"
+        )
 
-    # Ensure the output directory exists
+    # Make sure the output folder exists
     output_folder = os.path.dirname(output_path)
     os.makedirs(output_folder, exist_ok=True)
 
-    # Build the ProfileReport with rich settings
+    # Build the ProfileReport
     profile = ProfileReport(
         df,
         title=title,
@@ -39,10 +42,10 @@ def generate_eda_report(
         samples={"head": 10},
     )
 
-    # Optional: set target variable for profiling if specified
+    # Optionally set target
     if target and target in df.columns:
         print(f"Setting target variable for profiling: {target}")
         profile.set_variable(target)
 
-    # Save the generated HTML report
+    # Save the HTML report
     profile.to_file(output_path)
