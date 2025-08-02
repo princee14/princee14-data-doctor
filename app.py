@@ -24,7 +24,7 @@ from datetime import datetime
 
 # ✅ Gemini for AI Assistant
 import google.generativeai as genai
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+genai.configure(api_key=os.getenv("AIzaSyB2YAZpsb1zHjK8Su9E17XfJkAnerqX7cg"))
 model = genai.GenerativeModel("gemini-1.5-flash")
 
 st.set_page_config(page_title="🩺 Data Doctor", layout="wide")
